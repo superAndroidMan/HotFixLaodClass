@@ -9,6 +9,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // 开启分包
+        multiDexEnabled true
+        // 设置分包配置文件
+        multiDexKeepFile file('multidex.keep')
     }
     dexOptions {
         javaMaxHeapSize "4g"

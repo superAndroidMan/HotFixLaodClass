@@ -3,6 +3,7 @@ package com.superman.app.hotfixloadclass;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class FixActivity extends AppCompatActivity {
 
 
     private TextView textView;
+    private String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +49,11 @@ public class FixActivity extends AppCompatActivity {
     private void fixBug() {
         //1 从服务器下载dex文件 比如v1.1修复包文件（classes2.dex）
         File sourceFile = new File(Environment.getExternalStorageDirectory(), "classes2.dex");
-        // 目标路径：私有目录
+        // 目标路径：私有目录  data/data/包名
         //getDir("odex", Context.MODE_PRIVATE) data/user/0/包名/app_odex
+        if(sourceFile.exists()) {
+            Log.e(TAG,  "有了" + sourceFile.getName() + sourceFile.length() );
+        }
         File targetFile = new File(getDir("odex",
                 Context.MODE_PRIVATE).getAbsolutePath() + File.separator + "classes2.dex");
         if (targetFile.exists()) {
